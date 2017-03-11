@@ -1,0 +1,2 @@
+export const CHUCK_NORRIS_JOKE = 'CHUCK_NORRIS_JOKE';
+export const MARK_AS_FAVORITE = 'MARK_AS_FAVORITE';

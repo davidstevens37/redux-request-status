@@ -60,7 +60,7 @@ export default function jokeReducer(state, action) {
     
     case onSuccess(GET_JOKE):
       return merge(state, {
-        joke: action.data.value,
+        joke: action.data.joke,
         isLoading: false,
       });
 
