@@ -137,6 +137,9 @@ OR -- if the promose rejects
 
 ```
 
+## Thanks
+Thanks to [@JevinAnderson](https://github.com/JevinAnderson) for the feedback on the API.
+
 
 ## License
 
