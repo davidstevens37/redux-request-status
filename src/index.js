@@ -28,9 +28,30 @@ export function asyncActionCreator({ type, promise, ...rest }) {
   }
 }
 
+
+export const promiseMiddleware = ({ dispatch }) => next => action => {
+
+  const { type, promise, ...rest} = action;    
+
+  if (promise instanceof Promise) {
+        
+    dispatch({ type: onRequest(type), ...rest });
+
+    return promise
+      .then(data => next({ type: onSuccess(type), data }))
+      .catch(error => next({ type: onError(type), error, ...rest }));
+
+  }
+
+  return next(action);
+  
+}
+
+
 export default {
   onRequest,
   onError,
   onSuccess,
-  asyncActionCreator
+  asyncActionCreator,
+  promiseMiddleware
 }
