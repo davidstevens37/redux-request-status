@@ -38,7 +38,7 @@ export const promiseMiddleware = ({ dispatch }) => next => action => {
     dispatch({ type: onRequest(type), ...rest });
 
     return promise
-      .then(data => next({ type: onSuccess(type), data }))
+      .then(data => next({ type: onSuccess(type), data, extra: rest }))
       .catch(error => next({ type: onError(type), error, ...rest }));
 
   }
