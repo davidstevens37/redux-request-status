@@ -33,17 +33,15 @@ export const promiseMiddleware = ({ dispatch }) => next => action => {
 
   const { type, promise, ...rest} = action;    
 
-  if (promise instanceof Promise) {
-        
-    dispatch({ type: onRequest(type), ...rest });
+  const isPromise = typeof (promise || {}).then === 'function'
 
-    return promise
-      .then(data => next({ type: onSuccess(type), data, extra: rest }))
-      .catch(error => next({ type: onError(type), error, ...rest }));
+  if (!isPromise) return next(action);
+  
+  dispatch({ type: onRequest(type), ...rest });
 
-  }
-
-  return next(action);
+  return promise
+    .then(data => next({ type: onSuccess(type), data, extra: rest }))
+    .catch(error => next({ type: onError(type), error, ...rest }));
   
 }
 
